@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.pink-blue.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
-    <title>Pimenta Rosa - Home</title>
+    <title>Pimenta Rosa - Fornecedores</title>
 
 
 </head>
@@ -18,62 +18,69 @@
 
     <div id="vueApp">
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <% include ./header.ejs %>
+            <% include ../header.ejs %>
             <main class="mdl-layout__content mdl-color--grey-100">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-color--white mdl-shadow--2dp mdl-cell--12-col mdl-grid ">
                         
                         <div class="mdl-cell mdl-cell--12-col">
                             <div class="mdl-typography--headline-color-contrast	mdl-color-text--blue-grey-800">
-                                Produtos Vendidos
+                                Fornecedores
                             </div>
+                        </div>
+
+                        <div class="mdl-cell mdl-cell--2-col">
+                            <button onclick="window.location.href = window.location.href + '/new'"style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                <span>Novo Fornecedor</span>
+                            </button>
                         </div>
                         <div class="mdl-cell mdl-cell--12-col">
                             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
                                 <thead>
                                     <tr class="mdl-typography--text-uppercase">
-                                        <th class="mdl-data-table__cell--non-numeric">Código</th>
+                                        <th class="mdl-data-table__cell--non-numeric">CNPJ</th>
                                         <th class="mdl-data-table__cell--non-numeric">Nome</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Categoria</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Tamanho</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Fornecedor</th>
-                                        <th class="mdl-data-table__cell">Data</th>
-                                        <th class="mdl-data-table__cell">Preço</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Endereço</th>
+                                        <th class="mdl-data-table__cell">Contato</th>
+                                        
                                         <th class="mdl-data-table__cell">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="product in products">
+                                    <tr v-for="fornecedor in fornecedores">
                                         <td class="mdl-data-table__cell--non-numeric">
                                             Codigo
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            {{ product }}
+                                            {{ fornecedor }}
                                         </td>
+                                        
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            Camiseta
+                                             Estação - Rs 
                                         </td>
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                            M
-                                        </td>
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                            Fornecedor N
-                                        </td>
+
                                         <td class="mdl-data-table__cell">
-                                            03/11/2018
+                                             54 99999999 
                                         </td>
+                                        
+                                        
+                                        
+                                        
                                         <td class="mdl-data-table__cell">
-                                            R$ 120,00
-                                        </td>
-                                        <td class="mdl-data-table__cell">
-                                            <button v-on:click='' style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                                <span>View</span>
+                                            <button v-on:click='' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                                <i class="material-icons ">
+                                                    visibility
+                                                </i>
                                             </button>
-                                            <button v-on:click='' style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                                <span>Edit</span>
+                                            <button v-on:click='editFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
+                                                <i class="material-icons ">
+                                                    edit
+                                                </i>
                                             </button>
-                                            <button v-on:click='' style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                                <span>Delete</span>
+                                            <button v-on:click=''  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                                <i class="material-icons ">
+                                                    delete
+                                                </i>
                                             </button>
                                         </td>
                                     </tr>
@@ -95,14 +102,13 @@
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                products: [
-                    "Blusinha 1",
-                    "Calca 1",
-                    "Tenis 1",
-                    "Oculos 1",
-                    "Blusinha 2",
-                    "teste 1",
-                    "amandinha"
+                fornecedores: [
+                    "Fornecedor 1",
+                    "Fornecedor 2",
+                    "Fornecedor 3",
+                    "Fornecedor 3",
+                    "Fornecedor 3",
+                    
                 ],
                 name: "",
 				evaluators: "",
@@ -111,6 +117,9 @@
 				
 			},
 			methods: {
+                editFornecedor() {
+                    window.location.href = window.location.href + '/edit';
+                }
 			
 			}
 		});
