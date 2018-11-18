@@ -6,9 +6,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.pink-blue.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <% include ../partials/includes.ejs %>
-    <title>Pimenta Rosa - Produtos</title>
+    <title>Pimenta Rosa - Home</title>
 
 
 </head>
@@ -23,13 +25,13 @@
                         
                         <div class="mdl-cell mdl-cell--12-col">
                             <div class="mdl-typography--headline-color-contrast	mdl-color-text--blue-grey-800">
-                                Produtos
+                                Vendas
                             </div>
                         </div>
 
                         <div class="mdl-cell mdl-cell--2-col">
-                            <button onclick="window.location.href = window.location.href + '/new'"style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                <span>Novo Produto</span>
+                                <button onclick="window.location.href = window.location.href + '/new'"style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                <span>Nova Venda</span>
                             </button>
                         </div>
                         <div class="mdl-cell mdl-cell--12-col">
@@ -37,12 +39,10 @@
                                 <thead>
                                     <tr class="mdl-typography--text-uppercase">
                                         <th class="mdl-data-table__cell--non-numeric">Código</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Nome</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Categoria</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Tamanho</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Fornecedor</th>
-                                        <th class="mdl-data-table__cell">Preço</th>
-                                        <th class="mdl-data-table__cell">Visualizar</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Cliente</th>
+                                        <th class="mdl-data-table__cell">Valor</th>
+                                        <th class="mdl-data-table__cell">Data</th>
+                                        
                                         <th class="mdl-data-table__cell">Editar</th>
                                         <th class="mdl-data-table__cell">Deletar</th>
                                     </tr>
@@ -53,33 +53,19 @@
                                             Codigo
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            {{ product }}
-                                        </td>
-
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                            Categoria
+                                            Cliente 
                                         </td>
                                         
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                            P
-                                        </td>
-                                        
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                            PImenta Doida
-                                        </td>
                                         <td class="mdl-data-table__cell">
                                             R$ 120,00
                                         </td>
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalViewFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                                <i class="material-icons ">
-                                                    visibility
-                                                </i>
-                                            </button>
+                                            03/11/2018
                                         </td>
+                                        
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='editProduto()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
+                                            <button v-on:click='editFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
                                                 <i class="material-icons ">
                                                     edit
                                                 </i>
@@ -106,9 +92,8 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.11/fabric.min.js"></script>
 	<script src="https://unpkg.com/vue"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/material-modal.min.js"></script>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
@@ -129,9 +114,6 @@
 				
 			},
 			methods: {
-                editProduto() {
-                    window.location.href = window.location.href + '/edit';
-                }
 			
 			}
 		});

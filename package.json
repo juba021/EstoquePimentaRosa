@@ -11,7 +11,16 @@
   "dependencies": {
     "consign": "^0.1.6",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "material-modal": "^0.1.3"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juba021/EstoquePimentaRosa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/juba021/EstoquePimentaRosa/issues"
+  },
+  "homepage": "https://github.com/juba021/EstoquePimentaRosa#readme"
 }

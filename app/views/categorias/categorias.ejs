@@ -24,57 +24,39 @@
                         
                         <div class="mdl-cell mdl-cell--12-col">
                             <div class="mdl-typography--headline-color-contrast	mdl-color-text--blue-grey-800">
-                                Fornecedores
+                                Categorias
                             </div>
                         </div>
 
                         <div class="mdl-cell mdl-cell--2-col">
                             <button onclick="window.location.href = window.location.href + '/new'"style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                <span>Novo Fornecedor</span>
+                                <span>Nova Categoria</span>
                             </button>
                         </div>
                         <div class="mdl-cell mdl-cell--12-col">
                             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
                                 <thead>
                                     <tr class="mdl-typography--text-uppercase">
-                                        <th class="mdl-data-table__cell--non-numeric">CNPJ</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Codigo</th>
                                         <th class="mdl-data-table__cell--non-numeric">Nome</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Cidade</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Estado</th>
-                                        <th class="mdl-data-table__cell">Telefone</th>
                                         
-                                        <th >Visualizar</th>
-                                        <th >Editar</th>
-                                        <th >Deletar</th>
+                                        
+                                        
+                                        <th>Editar</th>
+                                        <th>Deletar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="fornecedor in fornecedores">
+                                    <tr v-for="categoria in categorias">
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            27.865.757/0063-05
+                                            Codigo Categoria
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            {{ fornecedor }}
+                                            {{ categoria }}
                                         </td>
                                         
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                             Estação 
-                                        </td>
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                              RS 
-                                        </td>
-
-                                        <td class="mdl-data-table__cell">
-                                            (54) 99999-9999 
-                                        </td>
                                         
-                                        <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalViewFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                                <i class="material-icons ">
-                                                    visibility
-                                                </i>
-                                            </button>
-                                        </td>
+                                        
 
                                         <td class="mdl-data-table__cell">
                                             <button v-on:click='editFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
@@ -119,8 +101,6 @@
                 </div>
             </main>
         </div>
-        <% include ./modalViewFornecedor.ejs %>
-        <% include ./modalDeleteFornecedor.ejs %>
         
 	</div>
 	
@@ -128,18 +108,17 @@
 	<script src="https://unpkg.com/vue"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
     <script src="js/material-modal.min.js"></script> 
-    <script src="js/main.js"></script> 
 
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                fornecedores: [
-                    "Fornecedor 1",
-                    "Fornecedor 2",
-                    "Fornecedor 3",
-                    "Fornecedor 4",
-                    "Fornecedor 5",
+                categorias: [
+                    "Blusa",
+                    "Vestido",
+                    "Calça",
+                    "sapato",
+                    
                     
                 ],
                 name: "",

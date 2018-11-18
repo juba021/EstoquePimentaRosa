@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.pink-blue.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
+    <% include ../partials/includes.ejs %>
     <title>Pimenta Rosa - Novo Produto</title>
 
 
@@ -18,7 +18,7 @@
 
     <div id="vueApp">
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <% include ../header.ejs %>
+            <% include ../partials/header.ejs %>
             <main class="mdl-layout__content mdl-color--grey-100">
                 <div class="mdl-grid">
                     <div class="mdl-grid">
@@ -121,13 +121,12 @@
                                 </div>
                             </div>
 
-                            <!-- Buttons -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
-                                <button onclick="window.location = '/produtos'" style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                    <span>Cancel</span>
+                                <button onclick="window.location = '/fornecedores'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                    <span>Cancelar</span>
                                 </button>
-                                <button v-on:click="" style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                    <span>Create</span>
+                                <button v-on:click="" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    <span>Cadastrar</span>
                                 </button>
                             </div>
 

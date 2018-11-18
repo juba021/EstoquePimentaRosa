@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <!-- Material Design Lite -->
+    <script src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body>
+    <button id="demo-show-toast" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Toast</button>
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar mdl mdl-color--red">
+      <div class="mdl-snackbar__text"></div>
+      <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+  </body>
+
+  <script>
+    (function() {
+  'use strict';
+  window['counter'] = 0;
+  var snackbarContainer = document.querySelector('#demo-toast-example');
+  var showToastButton = document.querySelector('#demo-show-toast');
+  showToastButton.addEventListener('click', function() {
+    'use strict';
+    ++counter;
+    var data;
+    if(counter==1)
+    {data = {message: 'Venda cadastrada com sucesso!'};
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);}
+    else if(counter==2)
+      {data = {message: 'Erro ao tentar cadastrar Venda!'};
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);}
+    else if(counter==3)
+      {data = {message: 'aa...thanks??'};
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);}
+  });
+}());
+  </script>
+</html>

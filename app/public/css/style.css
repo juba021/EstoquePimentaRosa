@@ -1,0 +1,19 @@
+.homeIconBG {
+    background-color: rgb(233,30,99);
+    color: white;
+    text-align: center;
+}
+
+.homeImgMargin {
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.homeCentralize {
+    justify-content: center;
+}
+
+.pinkText {
+    color: rgb(233,30,99);
+}

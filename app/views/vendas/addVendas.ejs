@@ -1,0 +1,162 @@
+
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    
+    <% include ../partials/includes.ejs %>
+    <title>Pimenta Rosa - Home</title>
+
+
+</head>
+<body>
+
+    <div id="vueApp">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <% include ../partials/header.ejs %>
+            <main class="mdl-layout__content mdl-color--grey-100">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-color--white mdl-shadow--2dp mdl-cell--12-col mdl-grid ">
+                        
+                        <div class="mdl-cell mdl-cell--12-col mdl-grid">
+                            <div class="mdl-typography--headline-color-contrast	mdl-color-text--blue-grey-800">
+                                Editar Venda
+                            </div>
+                            
+                        </div>
+                        <div class="mdl-cell mdl-cell--12-col mdl-grid">
+                                <button v-on:click='modalViewFornecedor()' style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    <span>Inserir Produto</span>
+                                </button>
+                                
+                                        
+                                
+                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+                                <thead>
+                                    <tr class="mdl-typography--text-uppercase">
+                                            <th class="mdl-data-table__cell--non-numeric">Código</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Nome</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Categoria</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Tamanho</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Fornecedor</th>
+                                            <th class="mdl-data-table__cell">Preço</th>
+                                            <th class="mdl-data-table__cell">Visualizar</th>
+                                            <th class="mdl-data-table__cell">Remover</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr v-for="product in products">
+                                                <td class="mdl-data-table__cell--non-numeric">
+                                                    Codigo
+                                                </td>
+                                                <td class="mdl-data-table__cell--non-numeric">
+                                                    {{ product }}
+                                                </td>
+        
+                                                <td class="mdl-data-table__cell--non-numeric">
+                                                    Categoria
+                                                </td>
+                                                
+                                                <td class="mdl-data-table__cell--non-numeric">
+                                                    P
+                                                </td>
+                                                
+                                                <td class="mdl-data-table__cell--non-numeric">
+                                                    PImenta Doida
+                                                </td>
+                                                <td class="mdl-data-table__cell">
+                                                    R$ 120,00
+                                                </td>
+                                                <td class="mdl-data-table__cell">
+                                                    <button v-on:click='modalViewFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                                        <i class="material-icons ">
+                                                            visibility
+                                                        </i>
+                                                    </button>
+                                                </td>
+        
+                                                
+        
+                                                <td class="mdl-data-table__cell">
+                                                    <button v-on:click='modalDeleteFornecedor()'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                                        <i class="material-icons ">
+                                                            delete
+                                                        </i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            
+                                             
+                                </tbody>
+                            </table>
+                        </div>
+                            <div class="mdl-cell mdl-cell--12-col">
+                                    
+                                    <button onclick="window.location = '/fornecedores'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                        <span>Cancelar</span>
+                                    </button>
+                                    <button v-on:click="" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                        <span>Atualizar</span>
+                                    </button>
+
+                                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin: 8px;">
+                                        <input class="mdl-textfield__input" type="text" v-model="nameGroup">
+                                        <label class="mdl-textfield__label">Cliente</label>
+                                    </div>
+                                    <span class="mdl-typography--headline-color-contrast" style="margin: 8px;">
+                                        Total: 
+                                        <span>R$ 360,00</span>
+                                    </span>
+
+                                    
+                                </div>
+                            
+                            
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <% include ./modalAddProduto.ejs %>
+	</div>
+	
+
+	<script src="https://unpkg.com/vue"></script>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
+    <script src="js/main.js"></script> 
+    <script src="js/material-modal.min.js"></script> 
+    <script>
+		var vueApp = new Vue({
+			el: '#vueApp',
+			data: {
+                products: [
+                    "Blusinha 1",
+                    "Calca 1",
+                    "Tenis 1",
+                    "Tenis 2",
+
+
+                ],
+                name: "",
+				evaluators: "",
+				experienceGain: "",
+				experienceRequire: "",
+				
+			},
+			methods: {
+
+                modalViewFornecedor() {
+                    document.getElementById('modalViewFornecedor').click();
+                },
+			
+			}
+		});
+	</script>
+
+
+</body>
+</html> 
