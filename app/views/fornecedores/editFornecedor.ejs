@@ -100,8 +100,8 @@
                                 <button onclick="window.location = '/fornecedores'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                                     <span>Cancelar</span>
                                 </button>
-                                <button v-on:click="cadastrar();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                    <span>Cadastrar</span>
+                                <button v-on:click="update();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    <span>Atualizar</span>
                                 </button>
                             </div>
 
@@ -127,6 +127,7 @@
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
+                id: <%- JSON.stringify(fornecedor._id) %>,
                 cnpj: <%- JSON.stringify(fornecedor.CNPJ) %>,
                 nome: <%- JSON.stringify(fornecedor.nome) %>,
                 nomeFantasia: <%- JSON.stringify(fornecedor.nomeFantasia) %>,
@@ -137,7 +138,9 @@
                 email: <%- JSON.stringify(fornecedor.email) %>,
 			},
 			methods: {
-                cadastrar() {
+                update() {
+                    
+                    
 					if (this.nome !== undefined && this.name !== "" &&
 						this.nomeFantasia !== undefined && this.nomeFantasia !== "" &&
 						this.cnpj !== undefined && this.cnpj !== "" &&
@@ -146,11 +149,13 @@
 						this.telefone !== undefined && this.telefone !== "" &&
 						this.email !== undefined && this.email !== "" &&
 						this.descricao !== undefined && this.descricao !== "") {
-                 
+                            
+                            
                         $.ajax({
-                            url: "/fornecedores/create",
+                            url: "/fornecedores/update/" + this.id ,
                             type: 'POST',
                             data: {
+                                
                                 nome: this.nome,
                                 nomeFantasia: this.nomeFantasia,
                                 CNPJ: this.cnpj,
@@ -166,21 +171,10 @@
                                 } else {
                                     console.log("syccess");
                                     console.log(response);
-                                    
-                                    vueApp.nome = "";
-                                    vueApp.nomeFantasia = "";
-                                    vueApp.cnpj = "";
-                                    vueApp.nocidademe = "";
-                                    vueApp.uf = "";
-                                    vueApp.telefone = "";
-                                    vueApp.email = "";
-                                    vueApp.description = "";
-    
                                 }
                             },
                             error: function (response) {
                                 console.log(response);
-                                
                             }
                         });
                     } else {
