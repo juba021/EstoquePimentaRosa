@@ -1,4 +1,3 @@
-
 <!doctype html>
 
 <html lang="en">
@@ -6,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.pink-blue.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
     <% include ../partials/includes.ejs %>
-    <title>Pimenta Rosa - Novo Fornecedor</title>
+
+    <title>Pimenta Rosa - Cadastrar Fornecedor</title>
+
 
 
 </head>
@@ -36,14 +35,14 @@
                             <!-- Product Name -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="name" id="missionName">
+                                    <input class="mdl-textfield__input" type="text" v-model="nome" id="missionName">
                                     <label for="missionName" class="mdl-textfield__label">Nome</label>
                                 </div>
                             </div>
                             
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="name" id="missionName">
+                                    <input class="mdl-textfield__input" type="text" v-model="nomeFantasia" id="missionName">
                                     <label for="missionName" class="mdl-textfield__label">Nome Fantasia</label>
                                 </div>
                             </div>
@@ -51,7 +50,7 @@
                             <!-- Product Name -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid" id="precoVenda" >
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="precoVenda" pattern="-?[0-9]*(\.[0-9]+)?">
+                                    <input class="mdl-textfield__input" type="text" v-model="cnpj" pattern="-?[0-9]*(\.[0-9]+)?">
                                     <label class="mdl-textfield__label">CNPJ</label>
                                     <span class="mdl-textfield__error">Input is not a number</span>
                                 </div>
@@ -75,7 +74,7 @@
 
                             <div class="mdl-cell mdl-cell--12-col mdl-grid" id="precoVenda" >
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="precoVenda" pattern="-?[0-9]*(\.[0-9]+)?">
+                                    <input class="mdl-textfield__input" type="text" v-model="telefone" pattern="-?[0-9]*(\.[0-9]+)?">
                                     <label class="mdl-textfield__label">Telefone</label>
                                     <span class="mdl-textfield__error">Input is not a number</span>
                                 </div>
@@ -83,7 +82,7 @@
 
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="uf" id="missionName">
+                                    <input class="mdl-textfield__input" type="text" v-model="email" id="missionName">
                                     <label for="missionName" class="mdl-textfield__label">E-mail</label>
                                 </div>
                             </div>
@@ -91,7 +90,7 @@
                             <!-- Description -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col mdl-textfield--floating-label">
-                                    <textarea class="mdl-textfield__input" type="text" rows="5" v-model="description"></textarea>
+                                    <textarea class="mdl-textfield__input" type="text" rows="5" v-model="descricao"></textarea>
                                     <label class="mdl-textfield__label" for="description">Descrição</label>
                                 </div>
                             </div>
@@ -101,7 +100,7 @@
                                 <button onclick="window.location = '/fornecedores'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                                     <span>Cancelar</span>
                                 </button>
-                                <button v-on:click="teste" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                <button v-on:click="cadastrar();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                     <span>Cadastrar</span>
                                 </button>
                             </div>
@@ -119,36 +118,84 @@
 
     <script src="https://unpkg.com/vue"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/material-modal.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/material-modal.min.js"></script> 
+    <script src="../js/main.js"></script> 
+
 
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                products: [
-                    "Blusinha 1",
-                    "Calca 1",
-                    "Tenis 1",
-                    "Oculos 1",
-                    "Blusinha 2",
-                    "teste 1",
-                    "amandinha"
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-                experienceRequire: "",
-                tamanho: "",
-                fornecedor: "",
-                description: "",
-				
+                cnpj: "",
+                nome: "",
+                nomeFantasia: "",
+                cidade: "",
+                uf: "",
+                telefone: "",
+                email: "",
+                descricao: "",
 			},
 			methods: {
                 teste() {
-                    snackbar('Error', 5);
+                    
 
+                },
+                cadastrar() {
+					if (this.nome !== undefined && this.name !== "" &&
+						this.nomeFantasia !== undefined && this.nomeFantasia !== "" &&
+						this.cnpj !== undefined && this.cnpj !== "" &&
+						this.cidade !== undefined && this.cidade !== "" &&
+						this.uf !== undefined && this.uf !== "" &&
+						this.telefone !== undefined && this.telefone !== "" &&
+						this.email !== undefined && this.email !== "" &&
+						this.descricao !== undefined && this.descricao !== "") {
+                 
+                        $.ajax({
+                            url: "/fornecedores/create",
+                            type: 'POST',
+                            data: {
+                                nome: this.nome,
+                                nomeFantasia: this.nomeFantasia,
+                                CNPJ: this.cnpj,
+                                cidade: this.cidade,
+                                uf: this.uf,
+                                telefone: this.telefone,
+                                email: this.email,
+                                descricao: this.descricao,   
+                            },
+                            success: function (response) {
+                                if (response.code === "error") {
+                                    
+                                } else {
+                                    console.log("syccess");
+                                    console.log(response);
+                                    
+                                    vueApp.nome = "";
+                                    vueApp.nomeFantasia = "";
+                                    vueApp.cnpj = "";
+                                    vueApp.nocidademe = "";
+                                    vueApp.uf = "";
+                                    vueApp.telefone = "";
+                                    vueApp.email = "";
+                                    vueApp.description = "";
+    
+                                }
+                            },
+                            error: function (response) {
+                                console.log(response);
+                                
+                            }
+                        });
+                    } else {
+                        
+                        
+                    }
                 }
+                    
+                
+
+
 			}
 		});
 	</script>

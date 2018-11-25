@@ -51,25 +51,25 @@
                                 <tbody>
                                     <tr v-for="fornecedor in fornecedores">
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            27.865.757/0063-05
+                                            {{fornecedor.CNPJ}}
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            {{ fornecedor }}
+                                            {{ fornecedor.nomeFantasia }}
                                         </td>
                                         
                                         <td class="mdl-data-table__cell--non-numeric">
-                                             Estação 
+                                             {{fornecedor.endereco.cidade}}
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                              RS 
+                                            {{fornecedor.endereco.uf}}
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            (54) 99999-9999 
+                                            {{fornecedor.telefone}}
                                         </td>
                                         
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalViewFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                            <button v-on:click='modalViewFornecedor(fornecedor)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                                 <i class="material-icons ">
                                                     visibility
                                                 </i>
@@ -77,7 +77,7 @@
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='editFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
+                                            <button v-on:click='editFornecedor(fornecedor._id)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
                                                 <i class="material-icons ">
                                                     edit
                                                 </i>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="mdl-cell mdl-cell--12-col" v-if="pages > 1">
                             <div style="text-align: center">
-                                <button class="mdl-button mdl-js-button mdl-button--icon" align="center" :disabled="currentPage - 1 <= 0" v-on:click="changePage(currentPage - 1)">
+                                <button class="mdl-button mdl-js-button mdl-button--icon"  :disabled="currentPage - 1 <= 0" v-on:click="changePage(currentPage - 1)">
                                     <i class="material-icons">navigate_before</i>
                                 </button>
                                 <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--accent">
@@ -127,39 +127,36 @@
 
 	<script src="https://unpkg.com/vue"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
-    <script src="js/material-modal.min.js"></script> 
-    <script src="js/main.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../../js/material-modal.min.js"></script> 
+    <script src="../../js/main.js"></script> 
 
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                fornecedores: [
-                    "Fornecedor 1",
-                    "Fornecedor 2",
-                    "Fornecedor 3",
-                    "Fornecedor 4",
-                    "Fornecedor 5",
-                    
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-                experienceRequire: "",
-                pages: 5,
-                disabled: 1
-				
+                fornecedores: <%- JSON.stringify(fornecedores) %>,
+                fornecedor: {},
+                cidade: "",
+                uf: ""
 			},
 			methods: {
                 editFornecedor() {
                     window.location.href = window.location.href + '/edit';
                 },
-                modalViewFornecedor() {
+                modalViewFornecedor(fornecedor) {
+                    this.fornecedor = fornecedor;
+                    this.cidade = fornecedor.endereco.cidade;
+                    this.uf = fornecedor.endereco.uf;
                     document.getElementById('modalViewFornecedor').click();
                 },
-                modalDeleteFornecedor() {
+                modalDeleteFornecedor(_id) {
+                    
                     document.getElementById('modalDeleteFornecedor').click();
                 },
+                editFornecedor(_id) {
+                    window.location = "/fornecedores/edit/" + _id;
+                }
                 
 			}
 		});
