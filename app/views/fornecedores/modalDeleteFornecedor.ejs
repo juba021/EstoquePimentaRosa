@@ -19,7 +19,7 @@
 
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col">
-                    <span>Tem certeza que deseja deletar esse produto? </span>
+                    <span>Tem certeza que deseja deletar o Fornecedor <b>{{fornecedor.nomeFantasia}}</b> ? </span>
                     <br>
                     <br>
                     
@@ -29,10 +29,10 @@
 
 
             <div class="modal__footer">
-                <button  onclick="document.getElementById('modalCloseDeleteFornecedor').click();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <button  onclick="document.getElementById('modalCloseDeleteFornecedor').click()" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     <span>Cancelar</span>
                 </button>
-                <button style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                <button v-on:click='deleteFornecedor(fornecedor._id)' style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                     <span>Confirmar</span>
                 </button>
             </div>

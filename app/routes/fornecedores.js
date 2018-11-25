@@ -5,9 +5,7 @@ module.exports = function(app) {
 
     //// Lista fornecedores
     app.get('/fornecedores', function(req, res) {
-        Fornecedor.find({}, function (err, fornecedores) {
-            console.log(fornecedores);
-            
+        Fornecedor.find({deletado: { $ne: true }}, function (err, fornecedores) {
             if (err) {
                 access.redirect();
             } else {
@@ -106,8 +104,40 @@ module.exports = function(app) {
                 }
             })
         }
-    });  
+    });
 
+
+    app.delete('/fornecedores/delete/:_id', function(req, res) {
+        Fornecedor.findById({_id: req.params._id}, function(err, fornecedor) {
+            console.log("chegou");
+        
+            
+            if (err || !fornecedor) {
+                access.redirect(req, res, true, 'error', err);
+            } else {
+                fornecedor.deletado = true;
+                
+                fornecedor.save(function (err, obj) {
+                    if (err) {
+                        access.redirect(req, res, true, 'error', err);
+                    } else {
+                        Fornecedor.find({ deletado: { $ne: true } }, function(err, fornecedores) {
+                            if (err) {
+                                access.redirect(req, res, true, 'error', err);
+                            } else {
+                                console.log("fornecedores find");
+                                console.log(fornecedores);
+                                
+                                res.json(fornecedores);
+                            }
+
+                        });
+                    }
+                })
+            
+            }
+        })
+    });
  
 
 }

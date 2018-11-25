@@ -85,7 +85,7 @@
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalDeleteFornecedor()'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                            <button v-on:click='modalDeleteFornecedor(fornecedor)'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
                                                 <i class="material-icons ">
                                                     delete
                                                 </i>
@@ -141,21 +141,39 @@
                 uf: ""
 			},
 			methods: {
-                editFornecedor() {
-                    window.location.href = window.location.href + '/edit';
-                },
+                
                 modalViewFornecedor(fornecedor) {
                     this.fornecedor = fornecedor;
                     this.cidade = fornecedor.endereco.cidade;
                     this.uf = fornecedor.endereco.uf;
                     document.getElementById('modalViewFornecedor').click();
                 },
-                modalDeleteFornecedor(_id) {
-                    
+                modalDeleteFornecedor(fornecedor) {
+                    this.fornecedor = fornecedor;
+
                     document.getElementById('modalDeleteFornecedor').click();
                 },
                 editFornecedor(_id) {
                     window.location = "/fornecedores/edit/" + _id;
+                },
+                deleteFornecedor(_id) {
+                    console.log(_id);
+                    
+                    $.ajax({
+                        url: "/fornecedores/delete/" + _id,
+                        type: 'DELETE',
+                        success: function (response) {
+                            if (response.code === "error") {
+                                
+                            } else {
+                                vueApp.fornecedores = response;
+                                document.getElementById('modalCloseDeleteFornecedor').click();
+                            }
+                        },
+                        error: function (response) {
+                            
+                        }
+                    });
                 }
                 
 			}
