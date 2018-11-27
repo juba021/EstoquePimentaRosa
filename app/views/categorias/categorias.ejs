@@ -9,7 +9,7 @@
     
     <% include ../partials/includes.ejs %>
 
-    <title>Pimenta Rosa - Fornecedores</title>
+    <title>Pimenta Rosa - Categorias</title>
 
 
 </head>
@@ -49,17 +49,15 @@
                                 <tbody>
                                     <tr v-for="categoria in categorias">
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            Codigo Categoria
+                                            {{ categoria.codigo }}
                                         </td>
+
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            {{ categoria }}
+                                            {{ categoria.nome }}
                                         </td>
-                                        
-                                        
-                                        
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='editFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
+                                            <button v-on:click='editCategoria(categoria._id)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
                                                 <i class="material-icons ">
                                                     edit
                                                 </i>
@@ -67,7 +65,7 @@
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalDeleteFornecedor()'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                            <button v-on:click='modalDeleteCategoria(categoria)'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
                                                 <i class="material-icons ">
                                                     delete
                                                 </i>
@@ -77,7 +75,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="mdl-cell mdl-cell--12-col" v-if="pages > 1">
+                        <!-- <div class="mdl-cell mdl-cell--12-col" v-if="pages > 1">
                             <div style="text-align: center">
                                 <button class="mdl-button mdl-js-button mdl-button--icon" align="center" :disabled="currentPage - 1 <= 0" v-on:click="changePage(currentPage - 1)">
                                     <i class="material-icons">navigate_before</i>
@@ -95,51 +93,57 @@
                                     <i class="material-icons">navigate_next</i>
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
             </main>
         </div>
-        
+        <% include ./modalDeleteCategoria.ejs %>
 	</div>
 	
 
 	<script src="https://unpkg.com/vue"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
-    <script src="js/material-modal.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../../js/material-modal.min.js"></script> 
+    <script src="../../js/main.js"></script>  
 
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                categorias: [
-                    "Blusa",
-                    "Vestido",
-                    "Calça",
-                    "sapato",
-                    
-                    
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-                experienceRequire: "",
-                pages: 5,
-                disabled: 1
+                categorias: <%- JSON.stringify(categorias) %>,
+                categoria: {},
+                codigo: "",
+                nome: "",
 				
 			},
 			methods: {
-                editFornecedor() {
-                    window.location.href = window.location.href + '/edit';
+                editCategoria(_id) {
+                    window.location = "/categorias/edit/" + _id;
                 },
-                modalViewFornecedor() {
-                    document.getElementById('modalViewFornecedor').click();
+                modalDeleteCategoria(categoria) {
+                    this.categoria = categoria;
+                    document.getElementById('modalDeleteCategoria').click();
                 },
-                modalDeleteFornecedor() {
-                    document.getElementById('modalDeleteFornecedor').click();
-                },
-                
+                deleteCategoria(_id) {
+                    $.ajax({
+                        url: "/categoria/delete/" + _id,
+                        type: 'PUT',
+                        success: function (response) {
+                            if (response.code === "error") {
+                                
+                            } else {
+                                vueApp.categorias = response;
+                                document.getElementById('modalCloseDeleteCategoria').click();
+                            }
+                        },
+                        error: function (response) {
+                            
+                        }
+                    });
+                }
 			}
 		});
 	</script>

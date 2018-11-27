@@ -35,15 +35,15 @@
                             <!-- Product Name -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="nome" id="missionName">
-                                    <label for="missionName" class="mdl-textfield__label">Nome</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="nome" id="nome">
+                                    <label for="nome" class="mdl-textfield__label">Nome</label>
                                 </div>
                             </div>
                             
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="nomeFantasia" id="missionName">
-                                    <label for="missionName" class="mdl-textfield__label">Nome Fantasia</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="nomeFantasia" id="nomeFantasia">
+                                    <label for="nomeFantasia" class="mdl-textfield__label">Nome Fantasia</label>
                                 </div>
                             </div>
 
@@ -59,16 +59,16 @@
                             <!-- Product Name -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="cidade" id="missionName">
-                                    <label for="missionName" class="mdl-textfield__label">Cidade</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="cidade" id="cidade">
+                                    <label for="cidade" class="mdl-textfield__label">Cidade</label>
                                 </div>
                             </div>
                             
                             <!-- estado -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="uf" id="missionName">
-                                    <label for="missionName" class="mdl-textfield__label">Estado</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="uf" id="uf">
+                                    <label for="uf" class="mdl-textfield__label">Estado</label>
                                 </div>
                             </div>
 
@@ -82,8 +82,8 @@
 
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="email" id="missionName">
-                                    <label for="missionName" class="mdl-textfield__label">E-mail</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="email" id="email">
+                                    <label for="email" class="mdl-textfield__label">E-mail</label>
                                 </div>
                             </div>
 
@@ -91,7 +91,7 @@
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col mdl-textfield--floating-label">
                                     <textarea class="mdl-textfield__input" type="text" rows="5" v-model="descricao"></textarea>
-                                    <label class="mdl-textfield__label" for="description">Descrição</label>
+                                    <label class="mdl-textfield__label" for="descricao">Descrição</label>
                                 </div>
                             </div>
 
@@ -139,9 +139,7 @@
 			},
 			methods: {
                 update() {
-                    
-                    
-					if (this.nome !== undefined && this.name !== "" &&
+					if (this.nome !== undefined && this.nome !== "" &&
 						this.nomeFantasia !== undefined && this.nomeFantasia !== "" &&
 						this.cnpj !== undefined && this.cnpj !== "" &&
 						this.cidade !== undefined && this.cidade !== "" &&
@@ -152,10 +150,9 @@
                             
                             
                         $.ajax({
-                            url: "/fornecedores/update/" + this.id ,
-                            type: 'POST',
+                            url: "/fornecedor/update/" + this.id ,
+                            type: 'PUT',
                             data: {
-                                
                                 nome: this.nome,
                                 nomeFantasia: this.nomeFantasia,
                                 CNPJ: this.cnpj,

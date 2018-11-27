@@ -1,13 +1,13 @@
 
 
-<a id="modalDeleteFornecedor" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal__trigger" data-modal="#DeleteFornecedor">
+<a id="modalDeleteCategoria" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal__trigger" data-modal="#DeleteCategoria">
 </a>
-<div id="DeleteFornecedor" class="modal modal__bg">
+<div id="DeleteCategoria" class="modal modal__bg">
     <div class="modal__dialog" style="width: 300px;">
         <div class="modal__content" style="height: auto; overflow: auto">
             <div class="modal__header">
                 <div class="modal__title">
-                    <span style="float:right" onclick="document.getElementById('modalCloseDeleteFornecedor').click();" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+                    <span style="float:right" onclick="document.getElementById('modalCloseDeleteCategoria').click();" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
                         <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">clear</i>
                     </span>
                     <h2 style="float:left" class="modal__title-text">
@@ -19,7 +19,7 @@
 
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--12-col">
-                    <span>Tem certeza que deseja deletar a categoria Vestido? </span>
+                    <span>Tem certeza que deseja deletar a categoria: <b> {{categoria.nome}} </b>? </span>
                     <br>
                     <br>
                     
@@ -29,15 +29,15 @@
 
 
             <div class="modal__footer">
-                <button  onclick="document.getElementById('modalCloseDeleteFornecedor').click();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                <button  onclick="document.getElementById('modalCloseDeleteCategoria').click();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     <span>Cancelar</span>
                 </button>
-                <button style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                <button v-on:click='deleteCategoria(categoria._id)' style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                     <span>Confirmar</span>
                 </button>
             </div>
 
-            <a style="display:none" id="modalCloseDeleteFornecedor" class="mdl-button mdl-button--colored mdl-js-button  modal__close">
+            <a style="display:none" id="modalCloseDeleteCategoria" class="mdl-button mdl-button--colored mdl-js-button  modal__close">
                 Close
             </a>
         </div>

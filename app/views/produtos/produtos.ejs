@@ -48,30 +48,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="product in products">
+                                    <tr v-for="produto in produtos">
+                                        teste
+                                        
+                                        <br>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            Codigo
+                                            {{ produto.codigo }}
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            {{ product }}
-                                        </td>
-
-                                        <td class="mdl-data-table__cell--non-numeric">
-                                            Categoria
+                                            {{ produto.nome }}
                                         </td>
                                         
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            P
+                                            {{ produto.categoria.nome }}                                            
                                         </td>
                                         
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            PImenta Doida
+                                            {{ produto.tamanho }}
+                                        </td>
+                                        
+                                        <td class="mdl-data-table__cell--non-numeric">
+                                            {{ produto.fornecedor.nomeFantasia }}
                                         </td>
                                         <td class="mdl-data-table__cell">
-                                            R$ 120,00
+                                            {{ produto.precoVenda }}
                                         </td>
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalViewFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                            <button v-on:click='modalViewProduto(produto)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                                 <i class="material-icons ">
                                                     visibility
                                                 </i>
@@ -79,7 +82,7 @@
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='editProduto()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
+                                            <button v-on:click='editProduto(produto._id)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
                                                 <i class="material-icons ">
                                                     edit
                                                 </i>
@@ -87,7 +90,7 @@
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalDeleteFornecedor()'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                            <button v-on:click='modalDeleteProduto(produto)'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
                                                 <i class="material-icons ">
                                                     delete
                                                 </i>
@@ -101,36 +104,53 @@
                 </div>
             </main>
         </div>
+        <% include ./modalViewProduto.ejs %>
+        <% include ./modalDeleteProduto.ejs %>
 	</div>
 	
 	<script src="https://unpkg.com/vue"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../js/material-modal.min.js"></script> 
-    <script src="../js/main.js"></script> 
+    <script src="../../js/material-modal.min.js"></script> 
+    <script src="../../js/main.js"></script> 
 
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                products: [
-                    "Blusinha 1",
-                    "Calca 1",
-                    "Tenis 1",
-                    "Oculos 1",
-                    "Blusinha 2",
-                    "teste 1",
-                    "amandinha"
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-				experienceRequire: "",
-				
+                produtos: <%- JSON.stringify(produtos) %>,
+                produto: {},
 			},
 			methods: {
-                editProduto() {
-                    window.location.href = window.location.href + '/edit';
+                modalViewProduto(produto) {
+                    this.produto = produto;
+                    document.getElementById('modalViewProduto').click();
+                },
+                modalDeleteProduto(produto) {
+
+                    this.produto = produto;
+                    document.getElementById('modalDeleteProduto').click();
+                },
+                editProduto(_id) {
+                    window.location = "/produto/edit/" + _id;
+                },
+                deleteProduto(_id) {
+                    
+                    $.ajax({
+                        url: "/produto/delete/" + _id,
+                        type: 'PUT',
+                        success: function (response) {
+                            if (response.code === "error") {
+                                
+                            } else {
+                                vueApp.produtos = response;
+                                document.getElementById('modalCloseDeleteProduto').click();
+                            }
+                        },
+                        error: function (response) {
+                            
+                        }
+                    });
                 }
 			
 			}

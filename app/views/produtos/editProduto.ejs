@@ -34,28 +34,24 @@
                             <!-- Codigo Produto -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="codProduto" id="codProduto">
-                                    <label for="missionName" class="mdl-textfield__label">Código</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="codigo" id="codigo">
+                                    <label for="codigo" class="mdl-textfield__label">Código</label>
                                 </div>
                             </div>
-                                
+                     
                             <!-- Product Name -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="nomeProduto" id="nomeProduto">
-                                    <label for="nomeProduto" class="mdl-textfield__label">Nome</label>
+                                    <input class="mdl-textfield__input" type="text" v-model="nome" id="nome">
+                                    <label for="nome" class="mdl-textfield__label">Nome</label>
                                 </div>
                             </div>
 
                             <!-- Categoria -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <select class="mdl-textfield__input" id="categoria" name="categoria">
-                                        <option></option>
-                                        <option class="mdl-menu__item" data-val="PP">Calça</option>
-                                        <option class="mdl-menu__item" data-val="P">Camisa</option>
-                                        <option class="mdl-menu__item" data-val="M">Vestido</option>
-                                        <option class="mdl-menu__item" data-val="G">Sapato</option>
+                                    <select class="mdl-textfield__input" v-model="categoria">
+                                        <option v-for="categoria in categorias" :value="categoria._id">{{categoria.nome}}</option>
                                     </select>
                                     <label class="mdl-textfield__label" for="categoria">Categoria</label>
                                 </div>
@@ -64,7 +60,7 @@
                             <!-- Tamanho -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <select class="mdl-textfield__input" id="tamanho" name="tamanho">
+                                    <select class="mdl-textfield__input" v-model="tamanho" id="tamanho" name="tamanho">
                                         <option></option>
                                         <option class="mdl-menu__item" data-val="PP">PP</option>
                                         <option class="mdl-menu__item" data-val="P">P</option>
@@ -72,6 +68,12 @@
                                         <option class="mdl-menu__item" data-val="G">G</option>
                                         <option class="mdl-menu__item" data-val="GG">GG</option>
                                         <option class="mdl-menu__item" data-val="U">U</option>
+                                        <option class="mdl-menu__item" data-val="U">34</option>
+                                        <option class="mdl-menu__item" data-val="U">35</option>
+                                        <option class="mdl-menu__item" data-val="U">36</option>
+                                        <option class="mdl-menu__item" data-val="U">37</option>
+                                        <option class="mdl-menu__item" data-val="U">38</option>
+                                        <option class="mdl-menu__item" data-val="U">39</option>
                                     </select>
                                     <label class="mdl-textfield__label" for="tamanho">Tamanho</label>
                                 </div>
@@ -81,24 +83,19 @@
                             <!-- Fornecedor -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <select class="mdl-textfield__input" id="fornecedor" name="fornecedor">
-                                        <option></option>
-                                        <option class="mdl-menu__item" data-val="fornecedor1">fornecedor 1</option>
-                                        <option class="mdl-menu__item" data-val="fornecedor2">fornecedor 2</option>
-                                        <option class="mdl-menu__item" data-val="fornecedor3">fornecedor 3</option>
-                                        <option class="mdl-menu__item" data-val="fornecedor4">fornecedor 4</option>
-                                        <option class="mdl-menu__item" data-val="fornecedor5">fornecedor 5</option>
-                                        <option class="mdl-menu__item" data-val="fornecedor6">fornecedor 6</option>
-                                        
+                                    <select class="mdl-textfield__input" v-model="fornecedor">
+                                        <option v-for="fornecedor in fornecedores" :value="fornecedor._id">{{fornecedor.nome}}</option>
                                     </select>
                                     <label class="mdl-textfield__label" for="fornecedor">Fornecedor</label>
                                 </div>
                             </div>
+
+                            
     
                             <!-- Preço pago -->
                             <div class="mdl-cell mdl-cell--12-col mdl-grid" id="precoPago">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="number" v-model="precoPago" pattern="-?[0-9]*(\.[0-9]+)?">
+                                    <input class="mdl-textfield__input" type="number" v-model="precoCompra" pattern="-?[0-9]*(\.[0-9]+)?">
                                     <label class="mdl-textfield__label">Preço pago</label>
                                     <span class="mdl-textfield__error">Input is not a number</span>
                                 </div>
@@ -122,10 +119,10 @@
                             </div>
 
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
-                                    <button onclick="window.location = '/fornecedores'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                    <button onclick="window.location = '/produtos'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                                         <span>Cancelar</span>
                                     </button>
-                                    <button v-on:click="" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    <button v-on:click="update()" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                         <span>Atualizar</span>
                                     </button>
                                 </div>
@@ -146,24 +143,67 @@
 	<script src="https://unpkg.com/vue"></script>
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../js/material-modal.min.js"></script> 
-    <script src="../js/main.js"></script> 
+    <script src="../../js/material-modal.min.js"></script> 
+    <script src="../../js/main.js"></script> 
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                products: [
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-                experienceRequire: "",
-                tamanho: "",
-                fornecedor: "",
-                description: "",
-				
+                categorias: <%- JSON.stringify(categorias) %>,
+                fornecedores: <%- JSON.stringify(fornecedores) %>,
+                id: <%- JSON.stringify(produto._id) %>,
+                codigo: <%- JSON.stringify(produto.codigo) %>,
+                nome: <%- JSON.stringify(produto.nome) %>,
+                categoria: <%- JSON.stringify(produto.categoria._id) %>,
+                tamanho: <%- JSON.stringify(produto.tamanho) %>,
+                fornecedor: <%- JSON.stringify(produto.fornecedor._id) %>,
+                precoCompra: <%- JSON.stringify(produto.precoCompra) %>,
+                precoVenda: <%- JSON.stringify(produto.precoVenda) %>,
+                descricao: <%- JSON.stringify(produto.descricao) %>,
 			},
 			methods: {
+
+                update() {
+					if (this.codigo !== undefined && this.codigo !== "" &&
+						this.nome !== undefined && this.nome !== "" &&
+						this.categoria !== undefined && this.categoria !== "" &&
+						this.tamanho !== undefined && this.tamanho !== "" &&
+						this.fornecedor !== undefined && this.fornecedor !== "" &&
+						this.precoCompra !== undefined && this.precoCompra !== "" &&
+						this.precoVenda !== undefined && this.precoVenda !== "" &&
+						this.descricao !== undefined && this.descricao !== "") {
+                            
+                            
+                        $.ajax({
+                            url: "/produto/update/" + this.id ,
+                            type: 'PUT',
+                            data: {
+                                codigo: this.codigo,
+                                nome: this.nome,
+                                categoria: this.categoria,
+                                tamanho: this.tamanho,
+                                fornecedor: this.fornecedor,
+                                precoCompra: this.precoCompra,
+                                precoVenda: this.precoVenda,
+                                descricao: this.descricao,   
+                            },
+                            success: function (response) {
+                                if (response.code === "error") {
+                                    
+                                } else {
+                                    console.log("syccess");
+                                    console.log(response);
+                                }
+                            },
+                            error: function (response) {
+                                console.log(response);
+                            }
+                        });
+                    } else {
+                        
+                        
+                    }
+                }
 			
 			}
 		});

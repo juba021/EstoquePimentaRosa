@@ -74,7 +74,7 @@
 
                             <div class="mdl-cell mdl-cell--12-col mdl-grid" id="precoVenda" >
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" v-model="telefone" pattern="-?[0-9]*(\.[0-9]+)?">
+                                    <input class="mdl-textfield__input" type="number" v-model="telefone" pattern="-?[0-9]*(\.[0-9]+)?">
                                     <label class="mdl-textfield__label">Telefone</label>
                                     <span class="mdl-textfield__error">Input is not a number</span>
                                 </div>
@@ -91,7 +91,7 @@
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <div class="mdl-textfield mdl-js-textfield mdl-cell--12-col mdl-textfield--floating-label">
                                     <textarea class="mdl-textfield__input" type="text" rows="5" v-model="descricao"></textarea>
-                                    <label class="mdl-textfield__label" for="description">Descrição</label>
+                                    <label class="mdl-textfield__label" for="descricao">Descrição</label>
                                 </div>
                             </div>
 
@@ -127,10 +127,10 @@
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                cnpj: "",
                 nome: "",
                 nomeFantasia: "",
                 cidade: "",
+                cnpj: "",
                 uf: "",
                 telefone: "",
                 email: "",
@@ -138,7 +138,7 @@
 			},
 			methods: {
                 cadastrar() {
-					if (this.nome !== undefined && this.name !== "" &&
+					if (this.nome !== undefined && this.nome !== "" &&
 						this.nomeFantasia !== undefined && this.nomeFantasia !== "" &&
 						this.cnpj !== undefined && this.cnpj !== "" &&
 						this.cidade !== undefined && this.cidade !== "" &&
@@ -148,7 +148,7 @@
 						this.descricao !== undefined && this.descricao !== "") {
                  
                         $.ajax({
-                            url: "/fornecedores/create",
+                            url: "/fornecedor/create",
                             type: 'POST',
                             data: {
                                 nome: this.nome,

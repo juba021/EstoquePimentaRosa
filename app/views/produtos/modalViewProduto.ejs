@@ -1,6 +1,6 @@
-<a id="modalViewFornecedor" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal__trigger" data-modal="#ViewFornecedor">
+<a id="modalViewProduto" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal__trigger" data-modal="#ViewProduto">
 </a>
-<div id="ViewFornecedor" class="modal modal__bg">
+<div id="ViewProduto" class="modal modal__bg">
     <div class="modal__dialog" style="width: 600px;">
         <div class="modal__content" style="max-height: 600px;">
             <div class="modal__header">
@@ -9,7 +9,7 @@
                         <b class="mdl-typography--headline-color-contrast mdl-color-text--blue-grey-800">Fornecedor:</b>
                         &nbsp Fornecedor 1
                     </h2>
-                    <span style="float:right" onclick="document.getElementById('modalCloseViewFornecedor').click();" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+                    <span style="float:right" onclick="document.getElementById('modalCloseViewProduto').click();" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
                         <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">clear</i>
                     </span>
                     
@@ -50,13 +50,13 @@
 
                 <div class="mdl-cell mdl-cell--12-col ">
                     <p>
-                        <b class="mdl-color-text--blue-grey-800">TELEFONE:</b> (54) 99999-9999
+                        <b class="mdl-color-text--blue-grey-800">TELEFONE:</b> 
                     </p>
                 </div>
 
                 <div class="mdl-cell mdl-cell--12-col ">
                     <p>
-                        <b class="mdl-color-text--blue-grey-800">E-MAIL:</b>  example.fornecedor@example.com
+                        <b class="mdl-color-text--blue-grey-800">E-MAIL:</b>  
                     </p>
                 </div>
 
@@ -70,14 +70,14 @@
             </div>
             
             <div class="modal__footer">
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored modal__close" style="margin: 8px;">
+                <a onclick="document.getElementById('modalCloseViewProduto').click();" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored modal__close" style="margin: 8px;">
                     CANCELAR
                 </a>
             </div>
 
             
 
-            <a style="display:none" id="modalCloseViewFornecedor" class="mdl-button mdl-button--colored mdl-js-button  modal__close">
+            <a style="display:none" id="modalCloseViewProduto" class="mdl-button mdl-button--colored mdl-js-button  modal__close">
                 Close
             </a>
         </div>

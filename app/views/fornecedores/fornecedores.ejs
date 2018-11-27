@@ -95,7 +95,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="mdl-cell mdl-cell--12-col" v-if="pages > 1">
+                        <!-- <div class="mdl-cell mdl-cell--12-col" v-if="pages > 1">
                             <div style="text-align: center">
                                 <button class="mdl-button mdl-js-button mdl-button--icon"  :disabled="currentPage - 1 <= 0" v-on:click="changePage(currentPage - 1)">
                                     <i class="material-icons">navigate_before</i>
@@ -113,7 +113,7 @@
                                     <i class="material-icons">navigate_next</i>
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -150,7 +150,6 @@
                 },
                 modalDeleteFornecedor(fornecedor) {
                     this.fornecedor = fornecedor;
-
                     document.getElementById('modalDeleteFornecedor').click();
                 },
                 editFornecedor(_id) {
@@ -160,8 +159,8 @@
                     console.log(_id);
                     
                     $.ajax({
-                        url: "/fornecedores/delete/" + _id,
-                        type: 'DELETE',
+                        url: "/fornecedor/delete/" + _id,
+                        type: 'PUT',
                         success: function (response) {
                             if (response.code === "error") {
                                 
