@@ -71,7 +71,7 @@
                                             {{ produto.fornecedor.nomeFantasia }}
                                         </td>
                                         <td class="mdl-data-table__cell">
-                                            {{ produto.precoVenda }}
+                                                R$ {{ produto.precoVenda }}
                                         </td>
                                         <td class="mdl-data-table__cell">
                                             <button v-on:click='modalViewProduto(produto)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
@@ -109,9 +109,9 @@
 	</div>
 	
 	<script src="https://unpkg.com/vue"></script>
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
+    <script src="../../js/material-modal.min.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../../js/material-modal.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.11/fabric.min.js"></script>
     <script src="../../js/main.js"></script> 
 
     <script>
@@ -120,10 +120,14 @@
 			data: {
                 produtos: <%- JSON.stringify(produtos) %>,
                 produto: {},
+                categoria: "",
+                fornecedor: "",
 			},
 			methods: {
                 modalViewProduto(produto) {
                     this.produto = produto;
+                    this.categoria = produto.categoria;
+                    this.fornecedor = produto.fornecedor
                     document.getElementById('modalViewProduto').click();
                 },
                 modalDeleteProduto(produto) {

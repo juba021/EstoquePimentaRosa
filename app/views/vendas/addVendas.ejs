@@ -23,12 +23,12 @@
                         
                         <div class="mdl-cell mdl-cell--12-col mdl-grid">
                             <div class="mdl-typography--headline-color-contrast	mdl-color-text--blue-grey-800">
-                                Editar Venda
+                                Cadastrar Venda
                             </div>
                             
                         </div>
                         <div class="mdl-cell mdl-cell--12-col mdl-grid">
-                                <button v-on:click='modalViewFornecedor()' style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                <button v-on:click='modalAddProduto()' style="margin-bottom: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                     <span>Inserir Produto</span>
                                 </button>
                                 
@@ -48,40 +48,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <tr v-for="product in products">
+                                        <tr v-for="produto in produtosVenda">
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                    Codigo
+                                                    {{produto.codigo}}
                                                 </td>
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                    {{ product }}
+                                                    {{ produto.nome }}
                                                 </td>
         
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                    Categoria
+                                                        {{ produto.categoria.nome }}  
                                                 </td>
                                                 
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                    P
+                                                    {{produto.tamanho}}
                                                 </td>
                                                 
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                    PImenta Doida
+                                                        {{ produto.fornecedor.nomeFantasia }}
                                                 </td>
                                                 <td class="mdl-data-table__cell">
-                                                    R$ 120,00
+                                                    R$ {{produto.precoVenda}}
                                                 </td>
                                                 <td class="mdl-data-table__cell">
-                                                    <button v-on:click='modalViewFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                                    <button v-on:click='modalViewProduto(produto)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                                         <i class="material-icons ">
                                                             visibility
                                                         </i>
                                                     </button>
                                                 </td>
         
-                                                
-        
                                                 <td class="mdl-data-table__cell">
-                                                    <button v-on:click='modalDeleteFornecedor()'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                                    <button v-on:click='modalRemoveProduto(produto)'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
                                                         <i class="material-icons ">
                                                             delete
                                                         </i>
@@ -95,65 +93,117 @@
                         </div>
                             <div class="mdl-cell mdl-cell--12-col">
                                     
-                                    <button onclick="window.location = '/fornecedores'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                        <span>Cancelar</span>
-                                    </button>
-                                    <button v-on:click="" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                                        <span>Atualizar</span>
-                                    </button>
+                                <button onclick="window.location = '/vendas'" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                    <span>Cancelar</span>
+                                </button>
+                                <button v-on:click="cadastrar()" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                                    <span>Cadastrar</span>
+                                </button>
 
-                                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin: 8px;">
-                                        <input class="mdl-textfield__input" type="text" v-model="nameGroup">
-                                        <label class="mdl-textfield__label">Cliente</label>
-                                    </div>
-                                    <span class="mdl-typography--headline-color-contrast" style="margin: 8px;">
-                                        Total: 
-                                        <span>R$ 360,00</span>
-                                    </span>
-
-                                    
+                                <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin: 8px;">
+                                    <input class="mdl-textfield__input" type="text" v-model="cliente">
+                                    <label class="mdl-textfield__label">Cliente</label>
                                 </div>
-                            
-                            
-                        
+                                <span class="mdl-typography--headline-color-contrast" style="margin: 8px;">
+                                    Total: 
+                                    <span>R$ {{total}}</span>
+                                </span>
+
+                            </div>
+
                     </div>
                 </div>
             </main>
         </div>
 
         <% include ./modalAddProduto.ejs %>
+        <% include ./modalRemoveProduto.ejs %>
+        <% include ./modalViewProduto.ejs %>
 	</div>
 	
 
 	<script src="https://unpkg.com/vue"></script>
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
-    <script src="js/main.js"></script> 
-    <script src="js/material-modal.min.js"></script> 
+    <script src="../../js/material-modal.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.11/fabric.min.js"></script>
+    <script src="../../js/main.js"></script> 
+
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                products: [
-                    "Blusinha 1",
-                    "Calca 1",
-                    "Tenis 1",
-                    "Tenis 2",
-
-
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-				experienceRequire: "",
-				
+                produtos: <%- JSON.stringify(produtos) %>,
+                produtosVenda: [],
+                cliente: "",
+                produto: {},
+                fornecedor: "",
+                categoria: "",
+                codProduto: "",
+                total: 0,
 			},
 			methods: {
-
-                modalViewFornecedor() {
-                    document.getElementById('modalViewFornecedor').click();
+                modalViewProduto(produto) {
+                    this.produto = produto;
+                    this.categoria = produto.categoria;
+                    this.fornecedor = produto.fornecedor
+                    document.getElementById('modalViewProduto').click();
                 },
-			
-			}
+                modalAddProduto() {
+                    document.getElementById('modalAddProduto').click();
+                },
+                insertProduto(codProduto) {
+                    var index = this.produtos.findIndex(e => (JSON.stringify(e.codigo) === JSON.stringify(codProduto)));
+                    var indexProdutosVenda = this.produtosVenda.findIndex(e => (JSON.stringify(e.codigo) === JSON.stringify(codProduto)));
+                    if (index !== -1 && indexProdutosVenda === -1) {
+                        this.produtosVenda.push(this.produtos[index]);
+                        this.codProduto = "";
+                        this.total += this.produtos[index].precoVenda;
+                        document.getElementById('modalCloseAddProduto').click();
+                    } else {
+                        console.log("error");
+                    }
+                },
+                modalRemoveProduto(produto) {
+                    this.produto = produto;
+                    document.getElementById('modalRemoveProduto').click();
+                },
+                removeProduto(codProduto) {
+                    var index = this.produtosVenda.findIndex(e => (JSON.stringify(e.codigo) === JSON.stringify(codProduto)));
+                    this.total -= this.produtosVenda[index].precoVenda;
+                    this.produtosVenda.splice(index,1);
+                },
+                cadastrar() {
+                    if (this.cliente !== undefined && this.cliente !== "" &&
+						this.total !== undefined && this.total > 0 &&
+						this.produtosVenda.length > 0) {
+                            
+                            $.ajax({
+                            url: "/venda/create",
+                            type: 'POST',
+                            data: {
+                                cliente: this.cliente,
+                                total: this.total,
+                                produtosVenda: this.produtosVenda,
+                            },
+                            success: function (response) {
+                                if (response.code === "error") {
+                                    
+                                } else {
+                                    vueApp.cliente = "";
+                                    vueApp.total = 0
+                                    vueApp.produtosVenda = [];
+                                }
+                            },
+                            error: function (response) {
+                                console.log(response);
+                                
+                            }
+                        }) 
+                    }
+                }
+
+
+			} ///end methods
 		});
 	</script>
 

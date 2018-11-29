@@ -48,24 +48,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="product in products">
+                                    <tr v-for="venda in vendas">
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            Codigo
+                                            {{venda._id}}
                                         </td>
                                         <td class="mdl-data-table__cell--non-numeric">
-                                            Cliente 
+                                            {{venda.cliente}}
                                         </td>
                                         
                                         <td class="mdl-data-table__cell">
-                                            R$ 120,00
+                                            R$ {{venda.total}}
                                         </td>
                                         <td class="mdl-data-table__cell">
-                                            03/11/2018
+                                            {{venda.dateCreated}}
                                         </td>
                                         
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='editFornecedor()' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
+                                            <button v-on:click='editVenda(venda._id)' id="button-edit-type" class="mdl-button mdl-button--fab mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--green">
                                                 <i class="material-icons ">
                                                     edit
                                                 </i>
@@ -95,33 +95,25 @@
 
     
 
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script> <!-- MDL JavaScript -->
+	<script src="https://unpkg.com/vue"></script>
+    <script src="../../js/material-modal.min.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.11/fabric.min.js"></script>
-    <script src="../../js/material-modal.min.js"></script> 
     <script src="../../js/main.js"></script> 
+    <script src="../../js/material.min.js"></script> 
+
     <script>
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                products: [
-                    "Blusinha 1",
-                    "Calca 1",
-                    "Tenis 1",
-                    "Oculos 1",
-                    "Blusinha 2",
-                    "teste 1",
-                    "amandinha"
-                ],
-                name: "",
-				evaluators: "",
-				experienceGain: "",
-				experienceRequire: "",
-				
+                vendas: <%- JSON.stringify(vendas) %>,	
 			},
 			methods: {
-			
+                editVenda(_id) {
+                    
+                    
+                    window.location = "/venda/edit/" + _id;
+                },
 			}
 		});
 	</script>

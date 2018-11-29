@@ -17,3 +17,7 @@
 .pinkText {
     color: rgb(233,30,99);
 }
+
+a:link { 
+    text-decoration:none; 
+} 
