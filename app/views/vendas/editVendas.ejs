@@ -23,7 +23,7 @@
                         
                         <div class="mdl-cell mdl-cell--12-col mdl-grid">
                             <div class="mdl-typography--headline-color-contrast	mdl-color-text--blue-grey-800">
-                                Cadastrar Venda
+                                Editar Venda
                             </div>
                             
                         </div>
@@ -48,8 +48,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                    
                                         <tr v-for="produto in produtosVenda">
-                                                <td class="mdl-data-table__cell--non-numeric">
+                                            <td class="mdl-data-table__cell--non-numeric">
                                                     {{produto.codigo}}
                                                 </td>
                                                 <td class="mdl-data-table__cell--non-numeric">
@@ -57,7 +59,7 @@
                                                 </td>
         
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                        {{ produto.categoria.nome }}  
+                                                    {{ produto.categoria.nome }}  
                                                 </td>
                                                 
                                                 <td class="mdl-data-table__cell--non-numeric">
@@ -65,7 +67,7 @@
                                                 </td>
                                                 
                                                 <td class="mdl-data-table__cell--non-numeric">
-                                                        {{ produto.fornecedor.nomeFantasia }}
+                                                    {{ produto.fornecedor.nomeFantasia }}
                                                 </td>
                                                 <td class="mdl-data-table__cell">
                                                     R$ {{produto.precoVenda}}
@@ -119,6 +121,7 @@
         <% include ./modalAddProduto.ejs %>
         <% include ./modalRemoveProduto.ejs %>
         <% include ./modalViewProduto.ejs %>
+        <% include ../partials/snackbar.ejs %>
 	</div>
 	
 
@@ -133,6 +136,7 @@
 			el: '#vueApp',
 			data: {
                 produtos: <%- JSON.stringify(produtos) %>,
+                id: <%- JSON.stringify(venda._id) %>,
                 produtosVenda: <%- JSON.stringify(venda.produtos) %>,
                 total: <%- JSON.stringify(venda.total) %>,
                 cliente: <%- JSON.stringify(venda.cliente) %>,
@@ -171,6 +175,7 @@
                     var index = this.produtosVenda.findIndex(e => (JSON.stringify(e.codigo) === JSON.stringify(codProduto)));
                     this.total -= this.produtosVenda[index].precoVenda;
                     this.produtosVenda.splice(index,1);
+                    document.getElementById('modalCloseRemoveProduto').click();
                 },
                 update() {
                     if (this.cliente !== undefined && this.cliente !== "" &&
@@ -178,7 +183,7 @@
 						this.produtosVenda.length > 0) {
                             
                             $.ajax({
-                            url: "/venda/create",
+                            url: "/venda/update/" + this.id,
                             type: 'POST',
                             data: {
                                 cliente: this.cliente,
@@ -187,15 +192,17 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                 } else {
+                                    snackbar('Erro ao cadastrar', 5, 'success');
                                     vueApp.cliente = "";
                                     vueApp.total = 0
                                     vueApp.produtosVenda = [];
                                 }
                             },
                             error: function (response) {
-                                console.log(response);
+                                snackbar('Erro ao cadastrar', 5, 'error');
+                                
                                 
                             }
                         }) 

@@ -57,10 +57,10 @@
                                         </td>
                                         
                                         <td class="mdl-data-table__cell">
-                                            R$ {{venda.total}}
+                                            R$ {{ parseFloat(Math.round(venda.total * 100) / 100).toFixed(2) }}
                                         </td>
                                         <td class="mdl-data-table__cell">
-                                            {{venda.dateCreated}}
+                                            {{ new Date(venda.dateCreated).toLocaleString() }}
                                         </td>
                                         
 
@@ -87,14 +87,9 @@
                 </div>
             </main>
         </div>
+        <% include ../partials/snackbar.ejs %>
 	</div>
 	
-
-
-
-
-    
-
 	<script src="https://unpkg.com/vue"></script>
     <script src="../../js/material-modal.min.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

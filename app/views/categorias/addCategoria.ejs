@@ -62,9 +62,9 @@
                 </div>
             </main>
         </div>
+        <% include ../partials/snackbar.ejs %>
 	</div>
 	
-
 	<script src="https://unpkg.com/vue"></script>
     <script src="../../js/material-modal.min.js"></script>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -92,8 +92,9 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                 } else {
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                     console.log("success");
                                     console.log(response);
                                     vueApp.codigo = "";
@@ -102,12 +103,13 @@
                                 }
                             },
                             error: function (response) {
+                                snackbar('Erro ao cadastrar', 5, 'error');
                                 console.log(response);
                                 
                             }
                         });
                     } else {
-                        
+                        snackbar('Erro ao cadastrar', 5, 'error');
 
                     }
                     

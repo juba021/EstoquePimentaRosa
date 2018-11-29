@@ -63,6 +63,7 @@
                 </div>
             </main>
         </div>
+        <% include ../partials/snackbar.ejs %>
 	</div>
 	
 	<script src="https://unpkg.com/vue"></script>
@@ -93,18 +94,21 @@
                                 },
                                 success: function (response) {
                                     if (response.code === "error") {
+                                        snackbar('Erro ao cadastrar', 5, 'error');
                                         
                                     } else {
+                                        snackbar('Erro ao cadastrar', 5, 'error');
                                         console.log("syccess");
                                         console.log(response);
                                     }
                                 },
                                 error: function (response) {
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                     console.log(response);
                                 }
                             });
                         } else {
-
+                            snackbar('Erro ao cadastrar', 5, 'error');
                         }
 						
                 }

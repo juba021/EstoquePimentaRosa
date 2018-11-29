@@ -137,6 +137,7 @@
                 </div>
             </main>
         </div>
+        <% include ../partials/snackbar.ejs %>
 	</div>
 	
 
@@ -161,6 +162,7 @@
                 precoCompra: "",
                 precoVenda: "",
                 descricao: "",
+                snackbarColor: ""
 				
 			},
 			methods: {
@@ -173,7 +175,8 @@
 						this.precoCompra !== undefined && this.precoCompra !== "" &&
 						this.precoVenda !== undefined && this.precoVenda !== "" &&
 						this.descricao !== undefined && this.descricao !== "") {
-
+                            console.log("teste");
+                            
                         $.ajax({
                             url: "/produto/create",
                             type: 'POST',
@@ -190,8 +193,9 @@
                             success: function (response) {
                                 if (response.code === "error") {
                                     
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                 } else {
-                                    snackbar('sucesso ao cadastrar', 5);
+                                    vueApp.snackbarColor = 0;
                                     vueApp.codigo = "";
                                     vueApp.nome = "";
                                     vueApp.categoria = "";
@@ -200,14 +204,18 @@
                                     vueApp.precoCompra = "";
                                     vueApp.precoVenda = "";
                                     vueApp.descricao = "";
+                                    snackbar('sucesso ao cadastrar', 5, 'success');
                                 }
                             },
                             error: function (response) {
-                                console.log(response);
+                                vueApp.snackbarColor = 1;
+                                snackbar('Erro ao cadastrar', 5, 'error');
                                 
                             }
                         });
                     } else {
+                        
+                        snackbar('Erro ao cadastrar', 5, 'error');
                         
 
                     }

@@ -1,4 +1,15 @@
-<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
-    <div class="mdl-snackbar__text"></div>
-    <button type="button" class="mdl-snackbar__action"></button>
-</div>
+ 
+    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar mdl-color--green" id="success-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+    </div>
+
+    <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar mdl-color--red" id="error-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+    </div>
+
+
+<!-- v-bind:class="{ 'mdl-color--amber':
+ elem.expertise.typeExp === 'badge', 'mdl-color--cyan-300': elem.expertise.typeExp === 'skill', 
+ 'mdl-color-text--white': elem.expertise.typeExp === 'skill'}"> -->

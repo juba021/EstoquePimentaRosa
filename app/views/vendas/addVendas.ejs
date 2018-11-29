@@ -119,6 +119,7 @@
         <% include ./modalAddProduto.ejs %>
         <% include ./modalRemoveProduto.ejs %>
         <% include ./modalViewProduto.ejs %>
+        <% include ../partials/snackbar.ejs %>
 	</div>
 	
 
@@ -187,15 +188,17 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                 } else {
+                                    snackbar('Erro ao cadastrar', 5, 'error');
                                     vueApp.cliente = "";
                                     vueApp.total = 0
                                     vueApp.produtosVenda = [];
                                 }
                             },
                             error: function (response) {
-                                console.log(response);
+                                snackbar('Erro ao cadastrar', 5, 'error');
+                                
                                 
                             }
                         }) 

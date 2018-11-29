@@ -121,6 +121,7 @@
         </div>
         <% include ./modalViewFornecedor.ejs %>
         <% include ./modalDeleteFornecedor.ejs %>
+        <% include ../partials/snackbar.ejs %>
         
 	</div>
 	
@@ -164,17 +165,19 @@
                         type: 'PUT',
                         success: function (response) {
                             if (response.code === "error") {
-                                
+                                snackbar('Erro ao cadastrar', 5, 'error');
                             } else {
+                                snackbar('Erro ao cadastrar', 5, 'error');
                                 vueApp.fornecedores = response;
                                 document.getElementById('modalCloseDeleteFornecedor').click();
                             }
                         },
                         error: function (response) {
-                            
+                            snackbar('Erro ao cadastrar', 5, 'error');
                         }
                     });
-                }
+                },
+                
                 
 			}
 		});
