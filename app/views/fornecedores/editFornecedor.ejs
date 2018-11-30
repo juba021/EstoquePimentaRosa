@@ -163,21 +163,20 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Erro ao tentar cadastrar fornecedor!', 5, 'error');
                                 } else {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Fornecedor atualizado com sucesso!', 5, 'success');
                                     console.log("syccess");
                                     console.log(response);
                                 }
                             },
                             error: function (response) {
-                                snackbar('Erro ao cadastrar', 5, 'error');
+                                snackbar('Erro ao tentar cadastrar fornecedor!', 5, 'error');
                                 
                             }
                         });
                     } else {
-                        snackbar('Erro ao cadastrar', 5, 'error');
-                        
+                        snackbar('Erro! Preencha todos os campos. ', 5, 'error');
                     }
                 }
                     

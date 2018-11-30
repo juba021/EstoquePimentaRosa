@@ -164,7 +164,7 @@
                         this.total += this.produtos[index].precoVenda;
                         document.getElementById('modalCloseAddProduto').click();
                     } else {
-                        console.log("error");
+                        snackbar('Erro! Produto não encontrado. ', 5, 'error');
                     }
                 },
                 modalRemoveProduto(produto) {
@@ -192,25 +192,25 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Erro ao tentar atualizar', 5, 'error');
                                 } else {
-                                    snackbar('Erro ao cadastrar', 5, 'success');
+                                    snackbar('Venda atualizada com sucesso!', 5, 'success');
                                     vueApp.cliente = "";
                                     vueApp.total = 0
                                     vueApp.produtosVenda = [];
                                 }
                             },
                             error: function (response) {
-                                snackbar('Erro ao cadastrar', 5, 'error');
-                                
-                                
+                                snackbar('Erro ao tentar atualizar', 5, 'error');
                             }
                         }) 
+                    } else {
+                        snackbar('Erro! Preencha todos os campos. ', 5, 'error');
                     }
                 }
 
 
-			} ///end methods
+			}
 		});
 	</script>
 

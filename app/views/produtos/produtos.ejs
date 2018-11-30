@@ -146,15 +146,15 @@
                         type: 'PUT',
                         success: function (response) {
                             if (response.code === "error") {
-                                snackbar('Erro ao cadastrar', 5, 'error');
+                                snackbar('Erro ao tentar deletar produto!', 5, 'error');
                             } else {
-                                snackbar('Erro ao cadastrar', 5, 'error');
+                                snackbar('Produto deletado com sucesso!', 5, 'success');
                                 vueApp.produtos = response;
                                 document.getElementById('modalCloseDeleteProduto').click();
                             }
                         },
                         error: function (response) {
-                            snackbar('Erro ao cadastrar', 5, 'error');
+                            snackbar('Erro ao tentar deletar produto!', 5, 'error');
                         }
                     });
                 }

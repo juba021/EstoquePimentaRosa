@@ -73,7 +73,7 @@
                                         </td>
 
                                         <td class="mdl-data-table__cell">
-                                            <button v-on:click='modalDeleteFornecedor()'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
+                                            <button v-on:click='modalDeleteVenda(venda)'  id="button-edit-type" class="mdl-button mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color--red ">
                                                 <i class="material-icons ">
                                                     delete
                                                 </i>
@@ -87,6 +87,7 @@
                 </div>
             </main>
         </div>
+        <% include ./modalDeleteVenda.ejs %>
         <% include ../partials/snackbar.ejs %>
 	</div>
 	
@@ -101,14 +102,40 @@
 		var vueApp = new Vue({
 			el: '#vueApp',
 			data: {
-                vendas: <%- JSON.stringify(vendas) %>,	
+                vendas: <%- JSON.stringify(vendas) %>,
+                venda: {}
 			},
 			methods: {
                 editVenda(_id) {
-                    
-                    
                     window.location = "/venda/edit/" + _id;
                 },
+                modalDeleteVenda(venda) {
+                    this.venda = venda;
+                    console.log(venda);
+                    
+                    document.getElementById('modalDeleteVenda').click();
+                },
+                deleteVenda(_id) {
+                    
+                    
+                    $.ajax({
+                        url: "/venda/delete/" + _id,
+                        type: 'PUT',
+                        success: function (response) {
+                            if (response.code === "error") {
+                                snackbar('Erro ao tentar deletar venda!', 5, 'error');
+                            } else {
+                                snackbar('Venda deletada com sucesso!', 5, 'success');
+                                vueApp.vendas = response;
+                                document.getElementById('modalCloseDeleteVenda').click();
+                            }
+                        },
+                        error: function (response) {
+                            snackbar('Erro ao tentar deletar venda!', 5, 'error');
+                        }
+                    });
+                
+                }
 			}
 		});
 	</script>

@@ -174,7 +174,6 @@
 						this.precoVenda !== undefined && this.precoVenda !== "" &&
 						this.descricao !== undefined && this.descricao !== "") {
                             
-                            
                         $.ajax({
                             url: "/produto/update/" + this.id ,
                             type: 'PUT',
@@ -190,20 +189,18 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Erro ao tentar atualizar produto!', 5, 'error');
                                 } else {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
-                                    console.log("syccess");
-                                    console.log(response);
+                                    snackbar('Produto atualizado com sucesso!', 5, 'success');
                                 }
                             },
                             error: function (response) {
-                                snackbar('Erro ao cadastrar', 5, 'error');
+                                snackbar('Erro ao tentar atualizar produto!', 5, 'error');
                                 
                             }
                         });
                     } else {
-                        snackbar('Erro ao cadastrar', 5, 'error');
+                        snackbar('Erro! Preencha todos os campos. ', 5, 'error');
                         
                     }
                 }

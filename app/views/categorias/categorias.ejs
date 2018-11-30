@@ -134,14 +134,15 @@
                         type: 'PUT',
                         success: function (response) {
                             if (response.code === "error") {
-                                
+                                snackbar('Erro ao tentar deletar categoria!', 5, 'error');
                             } else {
+                                snackbar('Categoria deletada com sucesso!', 5, 'success');
                                 vueApp.categorias = response;
                                 document.getElementById('modalCloseDeleteCategoria').click();
                             }
                         },
                         error: function (response) {
-                            
+                            snackbar('Erro ao tentar deletar categoria!', 5, 'error');
                         }
                     });
                 }

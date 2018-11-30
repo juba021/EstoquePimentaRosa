@@ -162,7 +162,7 @@
                 precoCompra: "",
                 precoVenda: "",
                 descricao: "",
-                snackbarColor: ""
+                
 				
 			},
 			methods: {
@@ -175,7 +175,6 @@
 						this.precoCompra !== undefined && this.precoCompra !== "" &&
 						this.precoVenda !== undefined && this.precoVenda !== "" &&
 						this.descricao !== undefined && this.descricao !== "") {
-                            console.log("teste");
                             
                         $.ajax({
                             url: "/produto/create",
@@ -193,9 +192,10 @@
                             success: function (response) {
                                 if (response.code === "error") {
                                     
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Erro ao tentar cadastrar produto!', 5, 'error');
                                 } else {
-                                    vueApp.snackbarColor = 0;
+                                    snackbar('Produto cadastrado com sucesso!', 5, 'success');
+                                    
                                     vueApp.codigo = "";
                                     vueApp.nome = "";
                                     vueApp.categoria = "";
@@ -204,20 +204,14 @@
                                     vueApp.precoCompra = "";
                                     vueApp.precoVenda = "";
                                     vueApp.descricao = "";
-                                    snackbar('sucesso ao cadastrar', 5, 'success');
                                 }
                             },
                             error: function (response) {
-                                vueApp.snackbarColor = 1;
-                                snackbar('Erro ao cadastrar', 5, 'error');
-                                
+                                snackbar('Erro ao tentar cadastrar produto!', 5, 'error');
                             }
                         });
                     } else {
-                        
-                        snackbar('Erro ao cadastrar', 5, 'error');
-                        
-
+                        snackbar('Erro! Preencha todos os campos. ', 5, 'error');
                     }
                 }
 			

@@ -32,7 +32,7 @@
                 <button  onclick="document.getElementById('modalCloseDeleteVenda').click();" style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     <span>Cancelar</span>
                 </button>
-                <button style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                <button v-on:click='deleteVenda(venda._id)' style="margin: 8px;" id="button-edit-type" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                     <span>Confirmar</span>
                 </button>
             </div>

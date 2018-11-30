@@ -165,7 +165,7 @@
                         type: 'PUT',
                         success: function (response) {
                             if (response.code === "error") {
-                                snackbar('Erro ao cadastrar', 5, 'error');
+                                snackbar('Erro ao tentar deletar fornecedor!', 5, 'error');
                             } else {
                                 snackbar('Erro ao cadastrar', 5, 'error');
                                 vueApp.fornecedores = response;
@@ -173,7 +173,7 @@
                             }
                         },
                         error: function (response) {
-                            snackbar('Erro ao cadastrar', 5, 'error');
+                            snackbar('Erro ao tentar deletar fornecedor!', 5, 'error');
                         }
                     });
                 },

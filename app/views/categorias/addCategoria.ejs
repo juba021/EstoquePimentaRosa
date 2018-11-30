@@ -92,9 +92,9 @@
                             },
                             success: function (response) {
                                 if (response.code === "error") {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Erro ao tentar cadastrar categoria!', 5, 'error');
                                 } else {
-                                    snackbar('Erro ao cadastrar', 5, 'error');
+                                    snackbar('Categoria atualizada com sucesso!', 5, 'success');
                                     console.log("success");
                                     console.log(response);
                                     vueApp.codigo = "";
@@ -103,14 +103,11 @@
                                 }
                             },
                             error: function (response) {
-                                snackbar('Erro ao cadastrar', 5, 'error');
-                                console.log(response);
-                                
+                                snackbar('Erro ao tentar cadastrar categoria!', 5, 'error');
                             }
                         });
                     } else {
-                        snackbar('Erro ao cadastrar', 5, 'error');
-
+                        snackbar('Erro! Preencha todos os campos. ', 5, 'error');
                     }
                     
                 }
